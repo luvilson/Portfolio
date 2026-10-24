@@ -1,0 +1,1001 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Cybersecurity Portfolio</title>
+  <style>
+    :root {
+      --site-primary: #102c3a;
+      --site-secondary: #d8f36a;
+      --site-background: #f4f7f5;
+      --site-on-primary: #ffffff;
+      --site-on-secondary: #17232a;
+      --site-on-background: #14232b;
+      --site-font-body: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      --site-font-heading: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      --site-heading-scale: 1;
+      --site-spacing-scale: 1;
+      --site-radius-scale: 1;
+      --site-decoration-opacity: 1;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: var(--site-font-body);
+      color: var(--site-on-background);
+      background: var(--site-background);
+    }
+
+    #app {
+      min-height: 100vh;
+      width: 100%;
+      background-color: var(--site-background);
+      border-radius: 0;
+      overflow: hidden;
+    }
+
+    a {
+      color: inherit;
+    }
+
+    .wrap {
+      width: min(1100px, calc(100% - 40px));
+      margin: 0 auto;
+    }
+
+    .nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      padding: calc(20px * var(--site-spacing-scale)) 0;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 800;
+      letter-spacing: -.04em;
+    }
+
+    .brand-mark {
+      display: grid;
+      place-items: center;
+      width: 36px;
+      height: 36px;
+      border-radius: calc(11px * var(--site-radius-scale));
+      background: var(--site-secondary);
+      color: var(--site-on-secondary);
+      font-weight: 900;
+    }
+
+    .navlinks {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      font-size: 13px;
+      color: light-dark(#53636a, #b5c3c7);
+    }
+
+    .navlinks a {
+      text-decoration: none;
+    }
+
+    .hero {
+      background: var(--site-primary);
+      color: var(--site-on-primary);
+      position: relative;
+      isolation: isolate;
+    }
+
+    .hero:after {
+      content: "";
+      position: absolute;
+      z-index: -1;
+      width: 350px;
+      height: 350px;
+      right: -90px;
+      top: -120px;
+      border: 1px solid rgba(216, 243, 106, .25);
+      border-radius: 50%;
+      box-shadow: 0 0 0 38px rgba(216, 243, 106, .05), 0 0 0 78px rgba(216, 243, 106, .04);
+      opacity: var(--site-decoration-opacity);
+    }
+
+    .hero-inner {
+      padding: clamp(52px, 8vw, 96px) 0 70px;
+      display: grid;
+      grid-template-columns: 1.5fr .8fr;
+      align-items: center;
+      gap: 45px;
+    }
+
+    .eyebrow {
+      color: var(--site-secondary);
+      text-transform: uppercase;
+      letter-spacing: .15em;
+      font-size: 11px;
+      font-weight: 800;
+    }
+
+    h1 {
+      font-family: var(--site-font-heading);
+      font-size: calc(clamp(42px, 7vw, 76px) * var(--site-heading-scale));
+      line-height: .99;
+      letter-spacing: -.065em;
+      margin: 18px 0;
+      max-width: 700px;
+    }
+
+    .hero p {
+      color: #d1dfe2;
+      font-size: 16px;
+      line-height: 1.8;
+      max-width: 590px;
+    }
+
+    .actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 28px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: calc(10px * var(--site-radius-scale));
+      padding: 13px 17px;
+      font-weight: 750;
+      font-size: 13px;
+      text-decoration: none;
+      border: 1px solid transparent;
+      cursor: pointer;
+    }
+
+    .btn.primary {
+      background: var(--site-secondary);
+      color: var(--site-on-secondary);
+    }
+
+    .btn.outline {
+      color: white;
+      border-color: #607680;
+      background: transparent;
+    }
+
+    .profile-card {
+      border: 1px solid #38515b;
+      border-radius: calc(22px * var(--site-radius-scale));
+      padding: 24px;
+      background: #183744;
+      box-shadow: 0 22px 55px rgba(0, 0, 0, .15);
+    }
+
+    .profile-icon {
+      display: grid;
+      place-items: center;
+      width: 72px;
+      height: 72px;
+      border-radius: 22px;
+      background: var(--site-secondary);
+      color: #17313a;
+      font-size: 28px;
+      font-weight: 900;
+      margin-bottom: 20px;
+    }
+
+    .profile-card h2 {
+      font-size: 20px;
+      letter-spacing: -.03em;
+      margin: 0 0 8px;
+    }
+
+    .profile-card p {
+      font-size: 13px;
+      margin: 0;
+      line-height: 1.7;
+    }
+
+    .pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 7px;
+      margin-top: 20px;
+    }
+
+    .pill {
+      padding: 7px 9px;
+      border: 1px solid #46616b;
+      border-radius: 99px;
+      font-size: 11px;
+      color: #e1e9e9;
+    }
+
+    section {
+      padding: 72px 0;
+    }
+
+    .section-head {
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+      gap: 24px;
+      margin-bottom: 28px;
+    }
+
+    .kicker {
+      color: #567078;
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+    }
+
+    h2.section-title {
+      font-size: calc(clamp(28px, 4vw, 42px) * var(--site-heading-scale));
+      letter-spacing: -.055em;
+      line-height: 1.08;
+      margin: 10px 0 0;
+    }
+
+    .section-desc {
+      max-width: 390px;
+      font-size: 14px;
+      line-height: 1.7;
+      color: #5e6d72;
+      margin: 0;
+    }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1.2fr .8fr;
+      gap: 30px;
+    }
+
+    .about-copy {
+      font-size: 15px;
+      line-height: 1.9;
+      color: #4e6067;
+    }
+
+    .facts {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+
+    .fact {
+      padding: 20px;
+      background: #fff;
+      border: 1px solid #e0e7e4;
+      border-radius: calc(14px * var(--site-radius-scale));
+    }
+
+    .fact strong {
+      display: block;
+      font-size: 14px;
+      margin-bottom: 6px;
+    }
+
+    .fact span {
+      color: #6a797e;
+      font-size: 12px;
+      line-height: 1.6;
+    }
+
+    .dark-section {
+      background: #e9efec;
+    }
+
+    .skills {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+    }
+
+    .skill-card,
+    .project-card,
+    .credential {
+      background: #fff;
+      border: 1px solid #dfe7e3;
+      border-radius: calc(16px * var(--site-radius-scale));
+      padding: 23px;
+    }
+
+    .skill-card .icon {
+      display: grid;
+      place-items: center;
+      width: 40px;
+      height: 40px;
+      border-radius: 12px;
+      background: #eff5d9;
+      font-size: 19px;
+      margin-bottom: 17px;
+    }
+
+    .skill-card h3,
+    .project-card h3,
+    .credential h3 {
+      margin: 0 0 9px;
+      font-size: 17px;
+      letter-spacing: -.025em;
+    }
+
+    .skill-card p,
+    .project-card p,
+    .credential p {
+      margin: 0;
+      color: #627178;
+      font-size: 13px;
+      line-height: 1.75;
+    }
+
+    .project-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+    }
+
+    .project-card {
+      padding: 0;
+      overflow: hidden;
+    }
+
+    .project-top {
+      padding: 23px 23px 20px;
+      background: #f0f5f2;
+      border-bottom: 1px solid #e1e8e4;
+    }
+
+    .project-num {
+      color: #64777d;
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: .12em;
+    }
+
+    .project-body {
+      padding: 22px 23px 24px;
+    }
+
+    .tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 7px;
+      margin: 17px 0;
+    }
+
+    .tag {
+      background: #edf2ef;
+      color: #42575f;
+      border-radius: 6px;
+      padding: 6px 8px;
+      font-size: 10px;
+      font-weight: 750;
+    }
+
+    .project-note {
+      border-left: 3px solid #bedf56;
+      padding-left: 12px;
+      margin-top: 15px;
+      color: #52666c;
+      font-size: 12px;
+      line-height: 1.65;
+    }
+
+    .project-links {
+      margin-top: 17px;
+      font-size: 12px;
+      font-weight: 800;
+      color: #244a57;
+    }
+
+    .project-links a {
+      text-decoration: none;
+    }
+
+    .timeline {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+
+    .credential {
+      display: flex;
+      gap: 16px;
+    }
+
+    .credential-icon {
+      display: grid;
+      place-items: center;
+      flex: 0 0 48px;
+      height: 48px;
+      border-radius: 13px;
+      background: #edf4dc;
+      color: #29454b;
+      font-weight: 900;
+    }
+
+    .meta {
+      font-size: 11px;
+      color: #64777d;
+      margin-bottom: 8px;
+    }
+
+    .lab-list {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+
+    .lab {
+      display: flex;
+      gap: 12px;
+      padding: 16px;
+      border: 1px solid #dce6e1;
+      background: #fff;
+      border-radius: 12px;
+    }
+
+    .check {
+      width: 23px;
+      height: 23px;
+      display: grid;
+      place-items: center;
+      flex: 0 0 23px;
+      background: #e8f4d1;
+      color: #31521b;
+      border-radius: 50%;
+      font-size: 12px;
+      font-weight: 900;
+    }
+
+    .lab strong {
+      display: block;
+      font-size: 13px;
+      margin: 2px 0 5px;
+    }
+
+    .lab span {
+      display: block;
+      color: #697a80;
+      font-size: 12px;
+      line-height: 1.6;
+    }
+
+    .education {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+
+    .edu-card {
+      padding: 22px;
+      border-radius: 14px;
+      background: #fff;
+      border: 1px solid #dfe7e3;
+    }
+
+    .edu-card .year {
+      color: #687a7f;
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: .1em;
+    }
+
+    .edu-card h3 {
+      margin: 9px 0 5px;
+      font-size: 17px;
+    }
+
+    .edu-card p {
+      margin: 0;
+      color: #687a7f;
+      font-size: 13px;
+      line-height: 1.6;
+    }
+
+    .contact {
+      background: var(--site-primary);
+      color: white;
+    }
+
+    .contact-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 25px;
+    }
+
+    .contact .section-desc {
+      color: #d0dcdf;
+      margin-top: 12px;
+    }
+
+    .contact-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .contact-links a {
+      border: 1px solid #56707a;
+      border-radius: 9px;
+      padding: 12px 14px;
+      text-decoration: none;
+      font-size: 12px;
+      font-weight: 750;
+    }
+
+    footer {
+      padding: 22px 0;
+      background: #0c222c;
+      color: #9db0b6;
+      font-size: 11px;
+    }
+
+    footer .wrap {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    @media (max-width:760px) {
+      .navlinks {
+        display: none;
+      }
+
+      .hero-inner {
+        grid-template-columns: 1fr;
+        gap: 28px;
+      }
+
+      .profile-card {
+        max-width: 440px;
+      }
+
+      .about-grid,
+      .skills,
+      .project-grid,
+      .timeline,
+      .lab-list,
+      .education {
+        grid-template-columns: 1fr;
+      }
+
+      .section-head,
+      .contact-inner {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+
+      section {
+        padding: 54px 0;
+      }
+
+      .facts {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    @media (prefers-color-scheme:dark) {
+      body {
+        background: #10191d;
+      }
+
+      #app {
+        background-color: #10191d;
+        color: #e7eeee;
+      }
+
+      .dark-section {
+        background: #182428;
+      }
+
+      .about-copy,
+      .section-desc {
+        color: #b1c0c2;
+      }
+
+      .fact,
+      .skill-card,
+      .project-card,
+      .credential,
+      .lab,
+      .edu-card {
+        background: #202e32;
+        border-color: #344549;
+      }
+
+      .project-top {
+        background: #1a282c;
+        border-color: #344549;
+      }
+
+      .skill-card p,
+      .project-card p,
+      .credential p,
+      .meta,
+      .edu-card p,
+      .lab span {
+        color: #b2c0c2;
+      }
+
+      .tag {
+        background: #304044;
+        color: #e0e9e8;
+      }
+
+      .project-note {
+        color: #c1cdcd;
+      }
+
+      .project-links {
+        color: #d8f36a;
+      }
+
+      .fact span {
+        color: #b2c0c2;
+      }
+
+      .kicker {
+        color: #b2c0c2;
+      }
+
+      .lab {
+        border-color: #344549;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div id="app">
+    <header class="hero" id="home">
+      <div class="wrap">
+        <nav class="nav" aria-label="Main navigation">
+          <div class="brand"><span class="brand-mark">LK</span><span>Cybersecurity Portfolio</span></div>
+          <div class="navlinks"><a href="#about">About</a><a href="#skills">Skills</a><a href="#projects">Projects</a><a
+              href="#labs">Labs</a><a href="#contact">Contact</a></div>
+        </nav>
+        <div class="hero-inner">
+          <div>
+            <div class="eyebrow">Aspiring Cybersecurity Professional</div>
+            <h1>Learning to make the digital world safer.</h1>
+            <p>BCA graduate and MCA student building practical cybersecurity skills through hands-on labs, Python
+              projects, networking fundamentals, and continuous learning.</p>
+            <div class="actions"><a class="btn primary" href="#projects">Explore my projects ↘</a><a class="btn outline"
+                href="#contact">Get in touch</a></div>
+          </div>
+          <aside class="profile-card">
+            <div class="profile-icon">⌘</div>
+            <h2>Luvilson Kurrey</h2>
+            <p>Cybersecurity learner focused on foundational security concepts, hands-on practice, and building useful
+              security tools.</p>
+            <div class="pills"><span class="pill">SOC fundamentals</span><span class="pill">Networking</span><span
+                class="pill">Linux</span><span class="pill">Python</span></div>
+          </aside>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <section id="about">
+        <div class="wrap">
+          <div class="section-head">
+            <div>
+              <div class="kicker">A little about me</div>
+              <h2 class="section-title">Curious by nature.<br>Practical by practice.</h2>
+            </div>
+            <p class="section-desc">My focus is to keep learning, apply concepts in safe lab environments, and document
+              what I build and discover.</p>
+          </div>
+          <div class="about-grid">
+            <p class="about-copy">I am a BCA graduate from MATS University, Raipur, and currently pursuing an MCA. I am
+              working toward an entry-level cybersecurity opportunity and strengthening my understanding of networking,
+              Linux, security tools, and threat investigation. I enjoy learning by doing—completing guided labs,
+              documenting results, and developing small projects that demonstrate my progress.</p>
+            <div class="facts">
+              <div class="fact"><strong>Current focus</strong><span>Cybersecurity fundamentals & SOC readiness</span>
+              </div>
+              <div class="fact"><strong>Learning style</strong><span>Hands-on labs and project-based practice</span>
+              </div>
+              <div class="fact"><strong>Education</strong><span>BCA graduate · MCA student</span></div>
+              <div class="fact"><strong>Based in</strong><span>Raipur, Chhattisgarh, India</span></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="dark-section" id="skills">
+        <div class="wrap">
+          <div class="section-head">
+            <div>
+              <div class="kicker">Technical toolkit</div>
+              <h2 class="section-title">Skills I’m building</h2>
+            </div>
+            <p class="section-desc">A foundation-first skill set, with an emphasis on understanding the basics and
+              practising them consistently.</p>
+          </div>
+          <div class="skills">
+            <article class="skill-card">
+              <div class="icon">⌁</div>
+              <h3>Networking</h3>
+              <p>TCP/IP, DNS, DHCP, ARP, HTTP/HTTPS, common ports, subnetting basics, and packet analysis concepts.</p>
+            </article>
+            <article class="skill-card">
+              <div class="icon">$_</div>
+              <h3>Linux & Security Tools</h3>
+              <p>Linux command line, file permissions, Nmap, Wireshark, tcpdump, Kali Linux, and introductory Metasploit
+                practice.</p>
+            </article>
+            <article class="skill-card">
+              <div class="icon">⌘</div>
+              <h3>Programming & Data</h3>
+              <p>Python, C/C++, SQL, HTML/CSS, JavaScript basics, Git/GitHub, data analysis, and machine-learning
+                fundamentals.</p>
+            </article>
+            <article class="skill-card">
+              <div class="icon">◈</div>
+              <h3>Security Concepts</h3>
+              <p>Hashing, encryption, cryptography basics, vulnerability awareness, authentication, and security
+                hygiene.</p>
+            </article>
+            <article class="skill-card">
+              <div class="icon">▤</div>
+              <h3>Documentation</h3>
+              <p>Lab notes, project documentation, basic technical reporting, and communicating findings clearly.</p>
+            </article>
+            <article class="skill-card">
+              <div class="icon">↗</div>
+              <h3>Professional Skills</h3>
+              <p>Continuous learning, analytical thinking, problem-solving, teamwork, and communication development.</p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section id="projects">
+        <div class="wrap">
+          <div class="section-head">
+            <div>
+              <div class="kicker">Selected work</div>
+              <h2 class="section-title">Projects</h2>
+            </div>
+            <p class="section-desc">Projects are presented as learning work. Add repository links, screenshots, and
+              verified test results as they become available.</p>
+          </div>
+          <div class="project-grid">
+            <article class="project-card">
+              <div class="project-top">
+                <div class="project-num">PROJECT 01 · SECURITY AUTOMATION</div>
+                <h3 style="margin:12px 0 0;font-size:23px">Phishing Detection</h3>
+              </div>
+              <div class="project-body">
+                <p>A project exploring how suspicious URLs or message indicators can be analysed to flag potential
+                  phishing attempts and help users recognise risky links.</p>
+                <div class="tags"><span class="tag">Cybersecurity</span><span class="tag">Python / ML</span><span
+                    class="tag">Detection</span></div>
+                <div class="project-note"><strong>Portfolio evidence to add:</strong> dataset/source, feature approach,
+                  evaluation metrics, sample test cases, limitations, and screenshots.</div>
+                <div class="project-links">Repository link can be added here</div>
+              </div>
+            </article>
+            <article class="project-card">
+              <div class="project-top">
+                <div class="project-num">PROJECT 02 · PYTHON TOOL</div>
+                <h3 style="margin:12px 0 0;font-size:23px">CyberHash — Hash Identifier</h3>
+              </div>
+              <div class="project-body">
+                <p>A hash-identification tool designed to inspect a hash string and suggest possible algorithms based on
+                  its format and characteristics.</p>
+                <div class="tags"><span class="tag">Python</span><span class="tag">Hashing</span><span
+                    class="tag">FastAPI</span><span class="tag">HTML/CSS/JS</span></div>
+                <div class="project-note"><strong>Scope:</strong> algorithm identification only. A matching length or
+                  pattern is a clue, not proof of the exact algorithm. Hash lookup is not included.</div>
+                <div class="project-links">Repository link can be added here</div>
+              </div>
+            </article>
+            <article class="project-card">
+              <div class="project-top">
+                <div class="project-num">PROJECT 03 · MACHINE LEARNING</div>
+                <h3 style="margin:12px 0 0;font-size:23px">YouTube ML Label Classification</h3>
+              </div>
+              <div class="project-body">
+                <p>A machine-learning project exploring label prediction/classification from YouTube-related data,
+                  alongside data exploration and a simple front-end workflow.</p>
+                <div class="tags"><span class="tag">Machine Learning</span><span class="tag">Python</span><span
+                    class="tag">EDA</span></div>
+                <div class="project-note">Repository reference previously shared: github.com/anuragkhunte/Youtube_ML_V1.
+                  Confirm ownership/contribution details before presenting it as your own work.</div>
+                <div class="project-links"><a href="https://github.com/anuragkhunte/Youtube_ML_V1" target="_blank"
+                    rel="noreferrer">View referenced repository ↗</a></div>
+              </div>
+            </article>
+            <article class="project-card">
+              <div class="project-top">
+                <div class="project-num">PROJECT 04 · HANDS-ON LEARNING</div>
+                <h3 style="margin:12px 0 0;font-size:23px">Network Recon & Packet Analysis</h3>
+              </div>
+              <div class="project-body">
+                <p>Practice exercises using Nmap and packet-analysis tools in authorised labs to understand hosts,
+                  ports, services, and network traffic.</p>
+                <div class="tags"><span class="tag">Nmap</span><span class="tag">Wireshark</span><span
+                    class="tag">tcpdump</span></div>
+                <div class="project-note">Add a lab report with the target environment, commands used, observations, and
+                  defensive takeaways. Scan only systems you own or are authorised to test.</div>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="dark-section" id="labs">
+        <div class="wrap">
+          <div class="section-head">
+            <div>
+              <div class="kicker">Practice & progress</div>
+              <h2 class="section-title">Hands-on labs</h2>
+            </div>
+            <p class="section-desc">Hands-on practice helps turn concepts into repeatable skills. Lab notes and
+              write-ups can make this progress easier to verify.</p>
+          </div>
+          <div class="lab-list">
+            <div class="lab">
+              <div class="check">✓</div>
+              <div><strong>TryHackMe — Cyber Security 101</strong><span>Completed learning path. Topics practised across
+                  security fundamentals and foundational technical areas.</span></div>
+            </div>
+            <div class="lab">
+              <div class="check">✓</div>
+              <div><strong>TryHackMe — Pre Security</strong><span>Completed foundational path covering core IT and
+                  cybersecurity concepts.</span></div>
+            </div>
+            <div class="lab">
+              <div class="check">✓</div>
+              <div><strong>Linux Fundamentals & PowerShell</strong><span>Introductory command-line learning and practice
+                  through guided rooms.</span></div>
+            </div>
+            <div class="lab">
+              <div class="check">✓</div>
+              <div><strong>Networking & Security Tools</strong><span>Learning Nmap, tcpdump, Wireshark/TShark, hashing,
+                  cryptography, and introductory exploitation concepts.</span></div>
+            </div>
+          </div>
+          <p style="font-size:12px;color:#687a7f;margin-top:18px;line-height:1.7">Only include completion claims that
+            match your current account progress. For public write-ups, follow each platform’s rules and avoid publishing
+            flags, credentials, or restricted challenge answers.</p>
+        </div>
+      </section>
+
+      <section id="certifications">
+        <div class="wrap">
+          <div class="section-head">
+            <div>
+              <div class="kicker">Learning credentials</div>
+              <h2 class="section-title">Certifications & training</h2>
+            </div>
+            <p class="section-desc">Credentials and training that support my continuing development in cybersecurity and
+              technology.</p>
+          </div>
+          <div class="timeline">
+            <article class="credential">
+              <div class="credential-icon">IBM</div>
+              <div>
+                <div class="meta">ISSUED OCTOBER 2026</div>
+                <h3>Cybersecurity Fundamentals</h3>
+                <p><strong>IBM</strong><br>Foundational cybersecurity learning. Add the official credential URL or
+                  certificate ID if available.</p>
+              </div>
+            </article>
+            <article class="credential">
+              <div class="credential-icon">THM</div>
+              <div>
+                <div class="meta">HANDS-ON LEARNING PATH</div>
+                <h3>TryHackMe — Cyber Security 101</h3>
+                <p>Completed. Practical learning through guided cybersecurity rooms and exercises.</p>
+              </div>
+            </article>
+            <article class="credential">
+              <div class="credential-icon">ML</div>
+              <div>
+                <div class="meta">2-MONTH TRAINING</div>
+                <h3>Machine Learning Training</h3>
+                <p>Training exposure to exploratory data analysis (EDA), machine-learning concepts, and front-end work.
+                </p>
+              </div>
+            </article>
+            <article class="credential">
+              <div class="credential-icon">BI</div>
+              <div>
+                <div class="meta">2-MONTH TRAINING / INTERNSHIP</div>
+                <h3>Power BI</h3>
+                <p>Dashboard creation and data visualisation training.</p>
+              </div>
+            </article>
+            <article class="credential">
+              <div class="credential-icon">GE</div>
+              <div>
+                <div class="meta">1-MONTH PROGRAM</div>
+                <h3>GEET Program</h3>
+                <p>Reasoning, communication, and employability-skills development.</p>
+              </div>
+            </article>
+            <article class="credential">
+              <div class="credential-icon">IBM</div>
+              <div>
+                <div class="meta">BOOTCAMP · 2026</div>
+                <h3>Bharat Cares | IBM SkillsBuild Cybersecurity Bootcamp</h3>
+                <p>Bootcamp participation and cybersecurity learning. Update the status if you receive a completion
+                  credential.</p>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section id="education" class="dark-section">
+        <div class="wrap">
+          <div class="section-head">
+            <div>
+              <div class="kicker">Academic background</div>
+              <h2 class="section-title">Education</h2>
+            </div>
+          </div>
+          <div class="education">
+            <article class="edu-card">
+              <div class="year">CURRENT</div>
+              <h3>Master of Computer Applications (MCA)</h3>
+              <p>Currently pursuing postgraduate studies.</p>
+            </article>
+            <article class="edu-card">
+              <div class="year">2025</div>
+              <h3>Bachelor of Computer Applications (BCA)</h3>
+              <p>MATS University · Raipur, Chhattisgarh</p>
+            </article>
+            <article class="edu-card">
+              <div class="year">CLASS XII</div>
+              <h3>Higher Secondary — CGBSE</h3>
+              <p>82%</p>
+            </article>
+            <article class="edu-card">
+              <div class="year">CLASS X</div>
+              <h3>Secondary — CGBSE</h3>
+              <p>58%</p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section id="contact" class="contact">
+        <div class="wrap contact-inner">
+          <div>
+            <div class="kicker">Let’s connect</div>
+            <h2 class="section-title">Open to learning<br>and entry-level opportunities.</h2>
+            <p class="section-desc">Interested in cybersecurity internships, junior SOC opportunities, and connecting
+              with people in the security community.</p>
+          </div>
+          <div class="contact-links"><a href="https://www.linkedin.com/" target="_blank" rel="noreferrer">LinkedIn
+              ↗</a><a href="https://github.com/" target="_blank" rel="noreferrer">GitHub ↗</a><a
+              href="mailto:your.email@example.com">Email ↗</a></div>
+        </div>
+      </section>
+    </main>
+    <footer>
+      <div class="wrap"><span>© 2026 Luvilson Kurrey · Cybersecurity Portfolio</span><span>Built around learning,
+          practice, and responsible security.</span></div>
+    </footer>
+  </div>
+</body>
+
+</html>
